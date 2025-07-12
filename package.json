@@ -1,0 +1,37 @@
+{
+  "name": "nest-cqrs-schematics",
+  "version": "0.0.1",
+  "description": "NestJS schematics for generating CQRS commands and queries",
+  "main": "dist/index.js",
+  "schematics": "./dist/collection.json",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && cp src/collection.json dist/ && cp src/command/schema.json dist/command/ && cp src/query/schema.json dist/query/",
+    "test": "npm run build && jasmine src/**/*_spec.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "nestjs",
+    "cqrs",
+    "schematics",
+    "command",
+    "query"
+  ],
+  "author": "Rameez Hasan <mrameezhasan@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "dist/**/*"
+  ],
+  "dependencies": {
+    "@angular-devkit/core": "^20.1.0",
+    "@angular-devkit/schematics": "^20.1.0",
+    "typescript": "~5.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.19",
+    "@types/jasmine": "~5.1.0",
+    "jasmine": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the query"
+    },
+    "path": {
+      "type": "string",
+      "description": "The path to generate the query files"
+    }
+  },
+  "required": ["name", "path"]
+}

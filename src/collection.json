@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "command": {
+      "description": "Generate a CQRS command and its handler",
+      "factory": "./command/command#command",
+      "schema": "./command/schema.json"
+    },
+    "query": {
+      "description": "Generate a CQRS query and its handler",
+      "factory": "./query/query#query",
+      "schema": "./query/schema.json"
+    }
+  }
+}
