@@ -1,6 +1,6 @@
 {
   "name": "nest-cqrs-schematics",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "NestJS schematics for generating CQRS commands and queries",
   "main": "dist/index.js",
   "schematics": "./dist/collection.json",
