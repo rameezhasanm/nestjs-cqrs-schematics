@@ -8,14 +8,14 @@ import {
 } from "@angular-devkit/schematics";
 
 // Interfaces
-import { GenerateOptions as CommandOptions } from "../utils/interface";
+import { GenerateOptions as CommandOptions } from "../types/index";
 
 // Templates
 import { processTemplate } from "../utils/template";
 import { COMMAND_TEMPLATES as TEMPLATES } from "./templates/command.template";
 
 // Helpers
-import { normalizeOptions, updateModuleFile } from "../utils/helpers";
+import { normalizeOptions, updateModuleFile } from "../utils";
 
 /**
  * Angular schematic rule for generating NestJS CQRS command and handler files

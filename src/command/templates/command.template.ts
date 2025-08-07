@@ -4,7 +4,7 @@
 export const COMMAND_TEMPLATES = {
   COMMAND: `
 
-  import { Command } from '@nestjs/cqrs';
+import { Command } from '@nestjs/cqrs';
 
 export interface <%= classify(name) %>CommandPayload {
   name: string;

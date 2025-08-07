@@ -4,7 +4,7 @@
 export const TEMPLATES = {
   QUERY: `
 
-  import { Query } from '@nestjs/cqrs';
+import { Query } from '@nestjs/cqrs';
 
 export interface <%= classify(name) %>QueryPayload {
   id: string;

@@ -12,10 +12,10 @@ import { processTemplate } from "../utils/template";
 import { TEMPLATES } from "./templates/query.template";
 
 // Interfaces
-import { GenerateOptions as QueryOptions } from "../utils/interface";
+import { GenerateOptions as QueryOptions } from "../types/index";
 
 // Helpers
-import { normalizeOptions, updateModuleFile } from "../utils/helpers";
+import { normalizeOptions, updateModuleFile } from "../utils";
 
 /**
  * Angular schematic rule for generating NestJS CQRS query and handler files
