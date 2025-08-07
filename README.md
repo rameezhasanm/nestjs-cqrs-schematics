@@ -142,4 +142,4 @@ Maintained with ❤️ by [Rameez Hasan](https://www.linkedin.com/in/m-rameez-ha
 
 ## 📄 License
 
-MIT
+[MIT](https://github.com/rameezhasanm/nestjs-cqrs-schematics/blob/main/LISCENCE)
