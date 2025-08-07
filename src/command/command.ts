@@ -39,7 +39,7 @@ export class <%= classify(name) %>Command extends Command<any> {
 `,
   HANDLER: `
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { <%= classify(name) %>Command, <%= classify(name) %>CommandPayload } from '<%= importPath %>';
+import { <%= classify(name) %>Command } from '<%= importPath %>';
 
 @CommandHandler(<%= classify(name) %>Command)
 export class <%= classify(name) %>Handler implements ICommandHandler<<%= classify(name) %>Command> {
@@ -107,7 +107,7 @@ export function command(_options: CommandOptions): Rule {
 
       // Update module file if not skipping import
       if (!skipImport) {
-        updateModuleFile(tree, { name, normalizedPath });
+        updateModuleFile(tree, { name, normalizedPath, flat });
       }
 
       return chain([]);
@@ -125,7 +125,7 @@ export function command(_options: CommandOptions): Rule {
  */
 function normalizeOptions(options: CommandOptions) {
   const name = strings.dasherize(options.name);
-  const path = options.path || DEFAULT_OPTIONS.PATH;
+  const path = options.path ? `src/${options.path}` : DEFAULT_OPTIONS.PATH;
   const normalizedPath = path.endsWith("/") ? path : `${path}/`;
   const skipImport = options.skipImport || DEFAULT_OPTIONS.SKIP_IMPORT;
   const flat = options.flat || DEFAULT_OPTIONS.FLAT;
@@ -170,6 +170,67 @@ function createCommandFiles(
 }
 
 /**
+ * Finds the first .module.ts file in the ../../ directory relative to the current path
+ *
+ * @param tree - The virtual file system tree
+ * @param currentPath - Current normalized path
+ * @returns Path to the module file or null if not found
+ */
+function findModuleFile(tree: Tree, currentPath: string): string | null {
+  // Navigate to ../../ from current path
+  const parentPath = getParentPath(currentPath, 1);
+
+  try {
+    // Get directory entries
+    const dir = tree.getDir(parentPath);
+
+    // Find all .module.ts files
+    const moduleFiles = dir.subfiles
+      .filter((file) => file.endsWith(".module.ts"))
+      .map((file) => `${parentPath}${file}`);
+
+    if (moduleFiles.length === 0) {
+      console.warn(`No .module.ts files found in ${parentPath}`);
+      return null;
+    }
+
+    if (moduleFiles.length > 1) {
+      console.warn(
+        `Multiple .module.ts files found in ${parentPath}:`,
+        moduleFiles
+      );
+      console.warn(`Using the first one: ${moduleFiles[0]}`);
+    }
+
+    console.log(`Found module file: ${moduleFiles[0]}`);
+    return moduleFiles[0];
+  } catch (error) {
+    console.warn(`Could not access directory ${parentPath}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Gets the parent directory path by going up the specified number of levels
+ *
+ * @param path - Current path
+ * @param levels - Number of levels to go up
+ * @returns Parent path
+ */
+function getParentPath(path: string, levels: number): string {
+  const normalizedPath = path.replace(/\/$/, ""); // Remove trailing slash
+  const pathParts = normalizedPath.split("/").filter((part) => part !== "");
+
+  // Remove the specified number of levels
+  for (let i = 0; i < levels && pathParts.length > 0; i++) {
+    pathParts.pop();
+  }
+
+  // Reconstruct path with trailing slash
+  return pathParts.length > 0 ? pathParts.join("/") + "/" : "";
+}
+
+/**
  * Updates the module file to include the new command handler
  *
  * @param tree - The virtual file system tree
@@ -180,14 +241,17 @@ function updateModuleFile(
   params: {
     name: string;
     normalizedPath: string;
+    flat: boolean;
   }
 ) {
-  const { name, normalizedPath } = params;
-  const modulePath = `${normalizedPath}users.module.ts`;
+  const { name, normalizedPath, flat } = params;
 
-  // Check if module file exists
-  if (!tree.exists(modulePath)) {
-    return; // Skip if module file doesn't exist
+  // Find the module file in ../../
+  const modulePath = findModuleFile(tree, normalizedPath);
+
+  if (!modulePath) {
+    console.warn("No module file found to update");
+    return;
   }
 
   try {
@@ -199,16 +263,33 @@ function updateModuleFile(
       );
     }
 
+    // Calculate relative import path from module to handler
+    const relativeImportPath = calculateRelativeImportPath(
+      modulePath,
+      normalizedPath,
+      name,
+      flat
+    );
+
     // Generate import and provider statements
     const importStatement = `import { ${strings.classify(
       name
-    )}Handler } from './handlers/${name}.handler';`;
+    )}Handler } from '${relativeImportPath}';`;
     const providerEntry = `    ${strings.classify(name)}Handler,`;
 
     // Skip if import already exists
-    if (moduleContent.includes(importStatement)) {
+    if (
+      moduleContent.includes(importStatement) ||
+      moduleContent.includes(`${strings.classify(name)}Handler`)
+    ) {
+      console.log(
+        `Handler ${strings.classify(name)}Handler already exists in module`
+      );
       return;
     }
+
+    console.log(`Adding import: ${importStatement}`);
+    console.log(`Adding provider: ${providerEntry}`);
 
     // Add import statement after existing imports
     const updatedImports = addImportStatement(moduleContent, importStatement);
@@ -222,9 +303,82 @@ function updateModuleFile(
 
     // Write updated content back to file
     tree.overwrite(modulePath, updatedProviders);
+    console.log(`Successfully updated module file: ${modulePath}`);
   } catch (error) {
     throw new SchematicsException(`Failed to update module file: ${error}`);
   }
+}
+
+/**
+ * Calculates the relative import path from module file to handler file
+ *
+ * @param modulePath - Path to the module file
+ * @param handlerBasePath - Base path where handlers are created
+ * @param name - Handler name
+ * @param flat - Whether using flat structure
+ * @returns Relative import path
+ */
+function calculateRelativeImportPath(
+  modulePath: string,
+  handlerBasePath: string,
+  name: string,
+  flat: boolean
+): string {
+  // Get the directory of the module file
+  const moduleDir = modulePath.substring(0, modulePath.lastIndexOf("/") + 1);
+
+  // Determine handler file location
+  const handlerPath = flat
+    ? `${handlerBasePath}${name}.handler`
+    : `${handlerBasePath}handlers/${name}.handler`;
+
+  // Calculate relative path from module directory to handler file
+  const relativePath = getRelativePath(moduleDir, handlerPath);
+
+  return relativePath;
+}
+
+/**
+ * Gets relative path from source to target
+ *
+ * @param from - Source path (directory)
+ * @param to - Target path (file without extension)
+ * @returns Relative path
+ */
+function getRelativePath(from: string, to: string): string {
+  const fromParts = from
+    .replace(/\/$/, "")
+    .split("/")
+    .filter((part) => part !== "");
+  const toParts = to.split("/").filter((part) => part !== "");
+
+  // Find common base
+  let commonLength = 0;
+  while (
+    commonLength < fromParts.length &&
+    commonLength < toParts.length &&
+    fromParts[commonLength] === toParts[commonLength]
+  ) {
+    commonLength++;
+  }
+
+  // Calculate relative path
+  const upLevels = fromParts.length - commonLength;
+  const downPath = toParts.slice(commonLength);
+
+  const relativeParts: string[] = [];
+
+  // Add '../' for each level up
+  for (let i = 0; i < upLevels; i++) {
+    relativeParts.push("..");
+  }
+
+  // Add the down path
+  relativeParts.push(...downPath);
+
+  // Join and ensure it starts with './' if it's not going up
+  const result = relativeParts.join("/");
+  return result.startsWith("../") ? result : `./${result}`;
 }
 
 /**
@@ -235,10 +389,18 @@ function updateModuleFile(
  * @returns Updated content with new import
  */
 function addImportStatement(content: string, importStatement: string): string {
-  return content.replace(
-    /import.*from '@nestjs\/common'.*;/,
-    `$&\n${importStatement}`
-  );
+  // Try to find the last import statement
+  const importRegex = /import.*from\s+['"][^'"]+['"];/g;
+  const imports = content.match(importRegex);
+
+  if (imports && imports.length > 0) {
+    // Find the last import and add after it
+    const lastImport = imports[imports.length - 1];
+    return content.replace(lastImport, `${lastImport}\n${importStatement}`);
+  } else {
+    // If no imports found, add at the beginning
+    return `${importStatement}\n${content}`;
+  }
 }
 
 /**
@@ -254,7 +416,7 @@ function addProviderEntry(
   providerEntry: string,
   name: string
 ): string {
-  return content.replace(/providers: \[([\s\S]*?)\]/, (match, providers) => {
+  return content.replace(/providers:\s*\[([\s\S]*?)\]/m, (match, providers) => {
     // Check if provider already exists
     if (providers.includes(`${strings.classify(name)}Handler`)) {
       return match;
@@ -262,7 +424,8 @@ function addProviderEntry(
 
     // Add new provider to the array
     const existingProviders = providers.trim();
-    const separator = existingProviders ? "," : "";
+    const separator =
+      existingProviders && !existingProviders.endsWith(",") ? "," : "";
 
     return `providers: [${existingProviders}${separator}\n${providerEntry}\n  ]`;
   });

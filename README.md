@@ -29,12 +29,23 @@ pnpm add -D nest-cqrs-schematics
 
 ## 🚀 Usage
 
+Add the following scripts to your `package.json` to simplify command execution:
+
+```json
+{
+  "scripts": {
+    "gen:cmd": "nest g -c nest-cqrs-schematics command",
+    "gen:query": "nest g -c nest-cqrs-schematics query"
+  }
+}
+```
+
 Run the following commands using the NestJS CLI:
 
 ### Generate a Command
 
 ```bash
-nest g -c nest-cqrs-schematics command create-user src/modules/features/users
+npm run gen:cmd create-user modules/features/users
 ```
 
 **Generates:**
@@ -56,7 +67,7 @@ src/
 ### Generate a Query
 
 ```bash
-nest g -c nest-cqrs-schematics query get-user src/modules/features/users
+npm run gen:query get-user modules/features/users
 ```
 
 **Generates:**
@@ -123,8 +134,9 @@ Planned for future versions:
 
 ## 👨‍💼 Developed By
 
-This tool was developed to streamline CQRS implementation in NestJS apps.\
-Feel free to contribute or share feedback!
+If you find this tool helpful, feel free to share your feedback, report issues, or contribute improvements!
+
+Maintained with ❤️ by [Rameez Hasan](https://www.linkedin.com/in/m-rameez-hasan/) — always open to collaboration and community input.
 
 ---
 
