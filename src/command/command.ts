@@ -23,13 +23,18 @@ interface CommandOptions {
  */
 const TEMPLATES = {
   COMMAND: `
+
+  import { Command } from '@nestjs/cqrs';
+
 export interface <%= classify(name) %>CommandPayload {
   name: string;
   description?: string;
 }
 
-export class <%= classify(name) %>Command {
-  constructor(public readonly payload: <%= classify(name) %>CommandPayload) {}
+export class <%= classify(name) %>Command extends Command<any> {
+  constructor(public readonly payload: <%= classify(name) %>CommandPayload) {
+    super();
+  }
 }
 `,
   HANDLER: `

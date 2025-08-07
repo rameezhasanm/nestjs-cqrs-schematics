@@ -23,12 +23,17 @@ interface QueryOptions {
  */
 const TEMPLATES = {
   QUERY: `
+
+  import { Query } from '@nestjs/cqrs';
+
 export interface <%= classify(name) %>QueryPayload {
   id: string;
 }
 
-export class <%= classify(name) %>Query {
-  constructor(public readonly payload: <%= classify(name) %>QueryPayload) {}
+export class <%= classify(name) %>Query extends Query<any> {
+  constructor(public readonly payload: <%= classify(name) %>QueryPayload) {
+    super();
+  }
 }
 `,
   HANDLER: `

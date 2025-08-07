@@ -1,1 +1,199 @@
-'use strict';const a0_0x394138=a0_0x47f0;(function(_0xdc636a,_0xad8a33){const _0x327947=a0_0x47f0,_0x449451=_0xdc636a();while(!![]){try{const _0xda0c40=-parseInt(_0x327947(0x1f9))/0x1+parseInt(_0x327947(0x1e6))/0x2+-parseInt(_0x327947(0x203))/0x3+parseInt(_0x327947(0x1f4))/0x4+parseInt(_0x327947(0x1f7))/0x5*(-parseInt(_0x327947(0x206))/0x6)+-parseInt(_0x327947(0x1ed))/0x7*(parseInt(_0x327947(0x1df))/0x8)+parseInt(_0x327947(0x1e2))/0x9;if(_0xda0c40===_0xad8a33)break;else _0x449451['push'](_0x449451['shift']());}catch(_0x23486e){_0x449451['push'](_0x449451['shift']());}}}(a0_0x5998,0x1b16a));function a0_0x47f0(_0x4a48a1,_0x2d17b8){const _0x599879=a0_0x5998();return a0_0x47f0=function(_0x47f082,_0x499ed4){_0x47f082=_0x47f082-0x1d5;let _0x140227=_0x599879[_0x47f082];return _0x140227;},a0_0x47f0(_0x4a48a1,_0x2d17b8);}function a0_0x5998(){const _0x330fae=['GHlGI','HANDLER','SchematicsException','impl/','overwrite','processTemplate','24YfDemX','flat','../impl/','3576042exbjxg','endsWith','defineProperty','name','118498ERKffB','includes','.command','\x0a\x20\x20]','Failed\x20to\x20generate\x20command:\x20','SKIP_IMPORT','skipImport','466599jLgYxa','$&\x0a','src','FLAT','.command.ts','RooyJ','read','340ITyeyb','\x20\x20\x20\x20','command','35135QNlCrx','exists','97984TeJMVJ','.handler.ts','path','classify','chain','@angular-devkit/schematics','<%=\x20importPath\x20%>','\x0aexport\x20interface\x20<%=\x20classify(name)\x20%>CommandPayload\x20{\x0a\x20\x20name:\x20string;\x0a\x20\x20description?:\x20string;\x0a}\x0a\x0aexport\x20class\x20<%=\x20classify(name)\x20%>Command\x20{\x0a\x20\x20constructor(public\x20readonly\x20payload:\x20<%=\x20classify(name)\x20%>CommandPayload)\x20{}\x0a}\x0a','toString','\x0aimport\x20{\x20CommandHandler,\x20ICommandHandler\x20}\x20from\x20\x27@nestjs/cqrs\x27;\x0aimport\x20{\x20<%=\x20classify(name)\x20%>Command,\x20<%=\x20classify(name)\x20%>CommandPayload\x20}\x20from\x20\x27<%=\x20importPath\x20%>\x27;\x0a\x0a@CommandHandler(<%=\x20classify(name)\x20%>Command)\x0aexport\x20class\x20<%=\x20classify(name)\x20%>Handler\x20implements\x20ICommandHandler<<%=\x20classify(name)\x20%>Command>\x20{\x0a\x20\x20constructor()\x20{}\x0a\x0a\x20\x20async\x20execute(command:\x20<%=\x20classify(name)\x20%>Command):\x20Promise<any>\x20{\x0a\x20\x20\x20\x20const\x20{\x20payload\x20}\x20=\x20command;\x0a\x20\x20\x20\x20return\x20{\x20success:\x20true\x20};\x0a\x20\x20}\x0a}\x0a','122208LiKLgF','users.module.ts','Handler','6TsLKpS','handlers/','dasherize','HsbWv','__esModule','eDOLr','ydjmZ','replace','strings','Could\x20not\x20read\x20module\x20file:\x20','SzYNK','UTuTg','import\x20{\x20','create'];a0_0x5998=function(){return _0x330fae;};return a0_0x5998();}Object[a0_0x394138(0x1e4)](exports,a0_0x394138(0x20a),{'value':!![]}),exports[a0_0x394138(0x1f6)]=command;const schematics_1=require(a0_0x394138(0x1fe)),core_1=require('@angular-devkit/core'),template_1=require('../utils/template'),TEMPLATES={'COMMAND':a0_0x394138(0x200),'HANDLER':a0_0x394138(0x202)},DEFAULT_OPTIONS={'PATH':a0_0x394138(0x1ef),'SKIP_IMPORT':![],'FLAT':![]};function command(_0x3bfecb){const _0x446cda=a0_0x394138,_0x3ddb74={'ydjmZ':'Command\x20name\x20is\x20required','UTuTg':function(_0xc40cc0,_0x25f45f){return _0xc40cc0(_0x25f45f);},'GHlGI':_0x446cda(0x1ff)};return(_0x491356,_0x5532de)=>{const _0x77dbf6=_0x446cda;try{if(!_0x3bfecb['name'])throw new schematics_1[(_0x77dbf6(0x1db))](_0x3ddb74[_0x77dbf6(0x20c)]);const _0x550889=_0x3ddb74[_0x77dbf6(0x1d6)](normalizeOptions,_0x3bfecb),{name:_0x1e92a3,normalizedPath:_0x3cffa8,skipImport:_0x3d2535,flat:_0x3b35b2}=_0x550889,_0x33a5e3=(0x0,template_1[_0x77dbf6(0x1de)])(TEMPLATES['COMMAND'],{'name':_0x1e92a3}),_0x51286a=_0x3b35b2?'./'+_0x1e92a3+_0x77dbf6(0x1e8):_0x77dbf6(0x1e1)+_0x1e92a3+_0x77dbf6(0x1e8),_0x198645=TEMPLATES[_0x77dbf6(0x1da)][_0x77dbf6(0x20d)](_0x3ddb74[_0x77dbf6(0x1d9)],_0x51286a),_0x50480a=(0x0,template_1[_0x77dbf6(0x1de)])(_0x198645,{'name':_0x1e92a3});return createCommandFiles(_0x491356,{'name':_0x1e92a3,'normalizedPath':_0x3cffa8,'flat':_0x3b35b2,'commandContent':_0x33a5e3,'handlerContent':_0x50480a}),!_0x3d2535&&updateModuleFile(_0x491356,{'name':_0x1e92a3,'normalizedPath':_0x3cffa8}),(0x0,schematics_1[_0x77dbf6(0x1fd)])([]);}catch(_0x2a9ba7){throw new schematics_1['SchematicsException'](_0x77dbf6(0x1ea)+_0x2a9ba7);}};}function normalizeOptions(_0xd320d5){const _0x704472=a0_0x394138,_0x1840f1=core_1[_0x704472(0x20e)][_0x704472(0x208)](_0xd320d5[_0x704472(0x1e5)]),_0x4e5d4b=_0xd320d5[_0x704472(0x1fb)]||DEFAULT_OPTIONS['PATH'],_0x2968ee=_0x4e5d4b[_0x704472(0x1e3)]('/')?_0x4e5d4b:_0x4e5d4b+'/',_0x3dc79c=_0xd320d5[_0x704472(0x1ec)]||DEFAULT_OPTIONS[_0x704472(0x1eb)],_0x59607f=_0xd320d5[_0x704472(0x1e0)]||DEFAULT_OPTIONS[_0x704472(0x1f0)];return{'name':_0x1840f1,'normalizedPath':_0x2968ee,'skipImport':_0x3dc79c,'flat':_0x59607f};}function createCommandFiles(_0x48f3b0,_0x5a72a0){const _0x3bd068=a0_0x394138,{name:_0x305eeb,normalizedPath:_0x115a60,flat:_0x44d597,commandContent:_0x12c7de,handlerContent:_0x5efe54}=_0x5a72a0,_0x3b7100=_0x44d597?_0x115a60:_0x115a60+_0x3bd068(0x1dc),_0x213374=_0x44d597?_0x115a60:_0x115a60+_0x3bd068(0x207),_0x12906d=''+_0x3b7100+_0x305eeb+_0x3bd068(0x1f1);_0x48f3b0[_0x3bd068(0x1d8)](_0x12906d,_0x12c7de);const _0x542a60=''+_0x213374+_0x305eeb+_0x3bd068(0x1fa);_0x48f3b0[_0x3bd068(0x1d8)](_0x542a60,_0x5efe54);}function updateModuleFile(_0x58d0aa,_0x29b890){const _0x1034f3=a0_0x394138,_0x557f7a={'HsbWv':function(_0x4a7ad8,_0x3464df){return _0x4a7ad8===_0x3464df;},'RooyJ':'utf-8','SzYNK':function(_0x18299a,_0x45a7e1,_0x10f094){return _0x18299a(_0x45a7e1,_0x10f094);},'eDOLr':function(_0x64600f,_0x8124ba,_0x3b9aed,_0x62c612){return _0x64600f(_0x8124ba,_0x3b9aed,_0x62c612);}};var _0x43e5f8;const {name:_0x388761,normalizedPath:_0xd63dbe}=_0x29b890,_0x230bac=_0xd63dbe+_0x1034f3(0x204);if(!_0x58d0aa[_0x1034f3(0x1f8)](_0x230bac))return;try{const _0x5e6b38=(_0x43e5f8=_0x58d0aa[_0x1034f3(0x1f3)](_0x230bac))===null||_0x557f7a[_0x1034f3(0x209)](_0x43e5f8,void 0x0)?void 0x0:_0x43e5f8[_0x1034f3(0x201)](_0x557f7a[_0x1034f3(0x1f2)]);if(!_0x5e6b38)throw new schematics_1[(_0x1034f3(0x1db))](_0x1034f3(0x20f)+_0x230bac);const _0x185f04=_0x1034f3(0x1d7)+core_1['strings'][_0x1034f3(0x1fc)](_0x388761)+'Handler\x20}\x20from\x20\x27./handlers/'+_0x388761+'.handler\x27;',_0x3971d7=_0x1034f3(0x1f5)+core_1[_0x1034f3(0x20e)][_0x1034f3(0x1fc)](_0x388761)+'Handler,';if(_0x5e6b38[_0x1034f3(0x1e7)](_0x185f04))return;const _0x304482=_0x557f7a[_0x1034f3(0x1d5)](addImportStatement,_0x5e6b38,_0x185f04),_0x59e2df=_0x557f7a[_0x1034f3(0x20b)](addProviderEntry,_0x304482,_0x3971d7,_0x388761);_0x58d0aa[_0x1034f3(0x1dd)](_0x230bac,_0x59e2df);}catch(_0x10cd2d){throw new schematics_1[(_0x1034f3(0x1db))]('Failed\x20to\x20update\x20module\x20file:\x20'+_0x10cd2d);}}function addImportStatement(_0x2a4abd,_0x1aa7e8){const _0x4609ac=a0_0x394138;return _0x2a4abd[_0x4609ac(0x20d)](/import.*from '@nestjs\/common'.*;/,_0x4609ac(0x1ee)+_0x1aa7e8);}function addProviderEntry(_0x41d0a3,_0x22d7c4,_0x16bff3){const _0x48c1e4=a0_0x394138;return _0x41d0a3[_0x48c1e4(0x20d)](/providers: \[([\s\S]*?)\]/,(_0x89ba76,_0x578fab)=>{const _0x38b7f5=_0x48c1e4;if(_0x578fab[_0x38b7f5(0x1e7)](core_1[_0x38b7f5(0x20e)][_0x38b7f5(0x1fc)](_0x16bff3)+_0x38b7f5(0x205)))return _0x89ba76;const _0x5d8f19=_0x578fab['trim'](),_0x101c1b=_0x5d8f19?',':'';return'providers:\x20['+_0x5d8f19+_0x101c1b+'\x0a'+_0x22d7c4+_0x38b7f5(0x1e9);});}
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.command = command;
+const schematics_1 = require("@angular-devkit/schematics");
+const core_1 = require("@angular-devkit/core");
+const template_1 = require("../utils/template");
+/**
+ * Constants for template definitions
+ */
+const TEMPLATES = {
+    COMMAND: `
+
+  import { Command } from '@nestjs/cqrs';
+
+export interface <%= classify(name) %>CommandPayload {
+  name: string;
+  description?: string;
+}
+
+export class <%= classify(name) %>Command extends Command<any> {
+  constructor(public readonly payload: <%= classify(name) %>CommandPayload) {
+    super();
+  }
+}
+`,
+    HANDLER: `
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { <%= classify(name) %>Command, <%= classify(name) %>CommandPayload } from '<%= importPath %>';
+
+@CommandHandler(<%= classify(name) %>Command)
+export class <%= classify(name) %>Handler implements ICommandHandler<<%= classify(name) %>Command> {
+  constructor() {}
+
+  async execute(command: <%= classify(name) %>Command): Promise<any> {
+    const { payload } = command;
+    return { success: true };
+  }
+}
+`,
+};
+/**
+ * Default values for command options
+ */
+const DEFAULT_OPTIONS = {
+    PATH: "src",
+    SKIP_IMPORT: false,
+    FLAT: false,
+};
+/**
+ * Angular schematic rule for generating NestJS CQRS command and handler files
+ *
+ * This schematic generates:
+ * - A command class with payload interface
+ * - A command handler implementing ICommandHandler
+ * - Optionally updates the module file with the new handler
+ *
+ * @param _options - Configuration options for the schematic
+ * @returns Rule function that applies the schematic transformations
+ */
+function command(_options) {
+    return (tree, _context) => {
+        try {
+            // Validate required options
+            if (!_options.name) {
+                throw new schematics_1.SchematicsException("Command name is required");
+            }
+            // Normalize and extract options
+            const options = normalizeOptions(_options);
+            const { name, normalizedPath, skipImport, flat } = options;
+            // Generate file contents from templates
+            const commandContent = (0, template_1.processTemplate)(TEMPLATES.COMMAND, { name });
+            // Generate handler content with dynamic import path
+            const importPath = flat ? `./${name}.command` : `../impl/${name}.command`;
+            const handlerTemplate = TEMPLATES.HANDLER.replace("<%= importPath %>", importPath);
+            const handlerContent = (0, template_1.processTemplate)(handlerTemplate, { name });
+            // Create command and handler files
+            createCommandFiles(tree, {
+                name,
+                normalizedPath,
+                flat,
+                commandContent,
+                handlerContent,
+            });
+            // Update module file if not skipping import
+            if (!skipImport) {
+                updateModuleFile(tree, { name, normalizedPath });
+            }
+            return (0, schematics_1.chain)([]);
+        }
+        catch (error) {
+            throw new schematics_1.SchematicsException(`Failed to generate command: ${error}`);
+        }
+    };
+}
+/**
+ * Normalizes and validates the input options
+ *
+ * @param options - Raw input options
+ * @returns Normalized options with defaults applied
+ */
+function normalizeOptions(options) {
+    const name = core_1.strings.dasherize(options.name);
+    const path = options.path || DEFAULT_OPTIONS.PATH;
+    const normalizedPath = path.endsWith("/") ? path : `${path}/`;
+    const skipImport = options.skipImport || DEFAULT_OPTIONS.SKIP_IMPORT;
+    const flat = options.flat || DEFAULT_OPTIONS.FLAT;
+    return {
+        name,
+        normalizedPath,
+        skipImport,
+        flat,
+    };
+}
+/**
+ * Creates the command and handler files in the file system tree
+ *
+ * @param tree - The virtual file system tree
+ * @param params - Parameters for file creation
+ */
+function createCommandFiles(tree, params) {
+    const { name, normalizedPath, flat, commandContent, handlerContent } = params;
+    // Determine target paths based on flat structure preference
+    const commandPath = flat ? normalizedPath : `${normalizedPath}impl/`;
+    const handlerPath = flat ? normalizedPath : `${normalizedPath}handlers/`;
+    // Create command file
+    const commandFilePath = `${commandPath}${name}.command.ts`;
+    tree.create(commandFilePath, commandContent);
+    // Create handler file
+    const handlerFilePath = `${handlerPath}${name}.handler.ts`;
+    tree.create(handlerFilePath, handlerContent);
+}
+/**
+ * Updates the module file to include the new command handler
+ *
+ * @param tree - The virtual file system tree
+ * @param params - Parameters for module update
+ */
+function updateModuleFile(tree, params) {
+    var _a;
+    const { name, normalizedPath } = params;
+    const modulePath = `${normalizedPath}users.module.ts`;
+    // Check if module file exists
+    if (!tree.exists(modulePath)) {
+        return; // Skip if module file doesn't exist
+    }
+    try {
+        const moduleContent = (_a = tree.read(modulePath)) === null || _a === void 0 ? void 0 : _a.toString("utf-8");
+        if (!moduleContent) {
+            throw new schematics_1.SchematicsException(`Could not read module file: ${modulePath}`);
+        }
+        // Generate import and provider statements
+        const importStatement = `import { ${core_1.strings.classify(name)}Handler } from './handlers/${name}.handler';`;
+        const providerEntry = `    ${core_1.strings.classify(name)}Handler,`;
+        // Skip if import already exists
+        if (moduleContent.includes(importStatement)) {
+            return;
+        }
+        // Add import statement after existing imports
+        const updatedImports = addImportStatement(moduleContent, importStatement);
+        // Add provider to the providers array
+        const updatedProviders = addProviderEntry(updatedImports, providerEntry, name);
+        // Write updated content back to file
+        tree.overwrite(modulePath, updatedProviders);
+    }
+    catch (error) {
+        throw new schematics_1.SchematicsException(`Failed to update module file: ${error}`);
+    }
+}
+/**
+ * Adds import statement to the module file
+ *
+ * @param content - Current module file content
+ * @param importStatement - Import statement to add
+ * @returns Updated content with new import
+ */
+function addImportStatement(content, importStatement) {
+    return content.replace(/import.*from '@nestjs\/common'.*;/, `$&\n${importStatement}`);
+}
+/**
+ * Adds provider entry to the providers array in the module file
+ *
+ * @param content - Current module file content
+ * @param providerEntry - Provider entry to add
+ * @param name - Command name for duplicate checking
+ * @returns Updated content with new provider
+ */
+function addProviderEntry(content, providerEntry, name) {
+    return content.replace(/providers: \[([\s\S]*?)\]/, (match, providers) => {
+        // Check if provider already exists
+        if (providers.includes(`${core_1.strings.classify(name)}Handler`)) {
+            return match;
+        }
+        // Add new provider to the array
+        const existingProviders = providers.trim();
+        const separator = existingProviders ? "," : "";
+        return `providers: [${existingProviders}${separator}\n${providerEntry}\n  ]`;
+    });
+}
+//# sourceMappingURL=command.js.map
