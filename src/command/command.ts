@@ -67,7 +67,8 @@ export function command(_options: CommandOptions): Rule {
 
       return chain([]);
     } catch (error) {
-      throw new SchematicsException(`Failed to generate command: ${error}`);
+      const message = error instanceof Error ? error.message : error;
+      throw new SchematicsException(`Failed to generate command: ${message}`);
     }
   };
 }
@@ -96,9 +97,18 @@ function createCommandFiles(
 
   // Create command file
   const commandFilePath = `${commandPath}${name}.command.ts`;
+
+  if (tree.exists(commandFilePath)) {
+    throw new SchematicsException(`File ${commandFilePath} already exists`);
+  }
+
   tree.create(commandFilePath, commandContent);
 
   // Create handler file
   const handlerFilePath = `${handlerPath}${name}.handler.ts`;
+
+  if (tree.exists(handlerFilePath)) {
+    throw new SchematicsException(`File ${handlerFilePath} already exists`);
+  }
   tree.create(handlerFilePath, handlerContent);
 }

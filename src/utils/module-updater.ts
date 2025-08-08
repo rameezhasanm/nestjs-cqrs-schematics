@@ -94,13 +94,14 @@ export function updateModuleFile(
     const providerEntry = `    ${strings.classify(name)}Handler,`;
 
     // Skip if import already exists
+
+    const handlerClass = `${strings.classify(name)}Handler`;
+
     if (
       moduleContent.includes(importStatement) ||
-      moduleContent.includes(`${strings.classify(name)}Handler`)
+      moduleContent.includes(providerEntry)
     ) {
-      console.log(
-        `Handler ${strings.classify(name)}Handler already exists in module`
-      );
+      console.log(`Handler ${handlerClass} already exists in module`);
       return;
     }
 
@@ -109,6 +110,12 @@ export function updateModuleFile(
 
     // Add import statement after existing imports
     const updatedImports = addImportStatement(moduleContent, importStatement);
+
+    if (!/providers\s*:\s*\[/.test(updatedImports)) {
+      throw new SchematicsException(
+        `No providers array found in ${modulePath}`
+      );
+    }
 
     // Add provider to the providers array
     const updatedProviders = addProviderEntry(
@@ -121,6 +128,10 @@ export function updateModuleFile(
     tree.overwrite(modulePath, updatedProviders);
     console.log(`Successfully updated module file: ${modulePath}`);
   } catch (error) {
-    throw new SchematicsException(`Failed to update module file: ${error}`);
+    throw new SchematicsException(
+      `Failed to update module file: ${
+        error instanceof Error ? error.message : String(error)
+      }`
+    );
   }
 }

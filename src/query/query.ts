@@ -67,7 +67,8 @@ export function query(_options: QueryOptions): Rule {
 
       return chain([]);
     } catch (error) {
-      throw new SchematicsException(`Failed to generate query: ${error}`);
+      const message = error instanceof Error ? error.message : error;
+      throw new SchematicsException(`Failed to generate query: ${message}`);
     }
   };
 }
@@ -96,9 +97,16 @@ function createQueryFiles(
 
   // Create query file
   const queryFilePath = `${queryPath}${name}.query.ts`;
+
+  if (tree.exists(queryFilePath)) {
+    throw new SchematicsException(`File ${queryFilePath} already exists`);
+  }
   tree.create(queryFilePath, queryContent);
 
   // Create handler file
   const handlerFilePath = `${handlerPath}${name}.handler.ts`;
+  if (tree.exists(handlerFilePath)) {
+    throw new SchematicsException(`File ${handlerFilePath} already exists`);
+  }
   tree.create(handlerFilePath, handlerContent);
 }
